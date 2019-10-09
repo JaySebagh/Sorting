@@ -7,7 +7,7 @@ def merge(arrA, arrB):
     startB = 0
 
     while startA + startB < elements:
-        print(startA, startB)
+        # print(startA, startB)
         if startB >= len(arrB):
             newArr.extend(arrA[startA:])
             startA += 1
@@ -27,7 +27,15 @@ def merge(arrA, arrB):
 # merge([0, 3, 4, 5, 8], [1, 2, 6, 7, 9])
 
 # [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
-# [1, 2, 4, 5, 8] [0, 3, 6, 7, 9]
 def merge_sort( arr ):
-    
-    return arr
+    if len(arr) == 1:
+        return arr
+    mid_point = len(arr) // 2
+    result_left = merge_sort(arr[:mid_point])
+    result_right = merge_sort(arr[mid_point:])
+    solution = merge(result_left, result_right)
+    return solution
+
+print(merge_sort([1, 5, 8, 4, 2, 9, 6, 0, 3]))
+
+# (len(arr)% 2) == 0 --> even
