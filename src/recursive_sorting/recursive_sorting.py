@@ -1,33 +1,41 @@
-# TO-DO: complete the helpe function below to merge 2 sorted arrays
-def merge( arrA, arrB ):
-    elements = len( arrA ) + len( arrB )
-    merged_arr = [0] * elements
-    # TO-DO
-    
-    return merged_arr
+# TO-DO: complete the helper function below to merge 2 sorted arrays
+def merge(arrA, arrB):
+    elements = len(arrA) + len(arrB)
+    newArr = []
+    start = 0
+    startA = 0
+    startB = 0
 
+    while startA + startB < elements:
+        # print(startA, startB)
+        if startB >= len(arrB):
+            newArr.extend(arrA[startA:])
+            startA += 1
+            break
+        elif startA >= len(arrA):
+            newArr.extend(arrB[startB:])
+            startB += 1
+            break
+        elif arrB[startB] < arrA[startA]:
+            newArr.append(arrB[startB])
+            startB += 1
+        else:
+            newArr.append(arrA[startA])
+            startA +=1
+    return newArr
 
-# TO-DO: implement the Merge Sort function below USING RECURSION
+# merge([0, 3, 4, 5, 8], [1, 2, 6, 7, 9])
+
+# [1, 5, 8, 4, 2, 9, 6, 0, 3, 7]
 def merge_sort( arr ):
-    # TO-DO
+    if len(arr) == 1:
+        return arr
+    mid_point = len(arr) // 2
+    result_left = merge_sort(arr[:mid_point])
+    result_right = merge_sort(arr[mid_point:])
+    solution = merge(result_left, result_right)
+    return solution
 
-    return arr
+print(merge_sort([1, 5, 8, 4, 2, 9, 6, 0, 3]))
 
-
-# STRETCH: implement an in-place merge sort algorithm
-def merge_in_place(arr, start, mid, end):
-    # TO-DO
-
-    return arr
-
-def merge_sort_in_place(arr, l, r): 
-    # TO-DO
-
-    return arr
-
-
-# STRETCH: implement the Timsort function below
-# hint: check out https://github.com/python/cpython/blob/master/Objects/listsort.txt
-def timsort( arr ):
-
-    return arr
+# (len(arr)% 2) == 0 --> even
